@@ -5,19 +5,37 @@ import AddContact from './AddContact';
 import ContactList from './ContactList';
 
 function App() {
+
+
+  const getLocalData = () => {
+    let retriveContacts = localStorage.getItem(LOCAL_STORAGE_KEY);
+    if (retriveContacts) {
+      return JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))
+    } else {
+      return [];
+    }
+  }
+  
   const LOCAL_STORAGE_KEY = "contacts";
-  const [contacts, setContacts] = useState([]);
+  const [contacts, setContacts] = useState(getLocalData());
 
   const addContactHandler = (contact) => {
-    console.log(contact);
     setContacts([...contacts, contact]);
   };
 
-  useEffect(() => {
-    const retriveContacts = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
-    if (retriveContacts) setContacts(retriveContacts);
-  }, []);
+  // useEffect(() => {
+  //   const retriveContacts = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
+  //   if (retriveContacts) setContacts(retriveContacts);
+  // }, []);
 
+  // useEffect(() => {
+  //   const retriveContacts = localStorage.getItem(LOCAL_STORAGE_KEY);
+  //   if (retriveContacts) {
+  //     setContacts(JSON.parse(retriveContacts));
+  //   }
+  // }, []);
+
+// add data to local storage
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(contacts));
   }, [contacts]);
