@@ -1,6 +1,12 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-class AddContact extends React.Component {
+export default function Nav(props) {
+    const navigation = useNavigate();
+    return <AddContact {...props} navigation={navigation} />;
+}
+
+export class AddContact extends React.Component {
     state = {
         name: '',
         email: '',
@@ -13,13 +19,14 @@ class AddContact extends React.Component {
             return;
         }
         this.props.addContactHandler(this.state);
-        this.setState({name:'', email:''});
+        this.setState({ name: '', email: '' });
     }
 
     render() {
+        const { navigation } = this.props;
         return (
             <div className='ui main'>
-                <h2>Add Contact</h2>
+                <h2 style={{ marginTop: '60px' }}>Add Contact</h2>
                 <form className='ui form' onSubmit={this.add}>
                     <div className='field'>
                         <label>Name</label>
@@ -29,11 +36,9 @@ class AddContact extends React.Component {
                         <label>Email</label>
                         <input type='text' name='email' placeholder='Email' onChange={(e) => this.setState({ email: e.target.value })} value={this.state.email} />
                     </div>
-                    <button className='ui button blue'>Add</button>
+                    <button className='ui button blue' onClick={()=>{navigation(-1)}}>Add</button>
                 </form>
             </div>
         )
     }
 }
-
-export default AddContact;
