@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route, Routes, useNavigate } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 import "./App.css";
 import Header from "./Header";
 import AddContact from "./AddContact";
 import ContactList from "./ContactList";
+import ContactDetail from "./ContactDetail";
 
 function App() {
 
@@ -48,6 +49,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/"
+            exact
             element={
               <ContactList
                 contacts={contacts}
@@ -58,6 +60,8 @@ function App() {
               <AddContact
                 addContactHandler={addContactHandler}
               />} />
+
+          <Route path='/contact/:id' element={<ContactDetail />} />
         </Routes>
       </Router>
     </div>
