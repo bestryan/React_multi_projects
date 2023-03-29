@@ -3,13 +3,10 @@ import { Link, useLocation } from 'react-router-dom';
 import user from '../images/user.jpg';
 
 const ContactDetail = (props) => {
-
     const location = useLocation();
-    console.log(props, " props");
-    console.log(location, " useLocation Hook");
-
+    // console.log(props, " props");
+    // console.log(location, " useLocation Hook");
     const {name, email} = location.state;
-
     return (
         <div className='main' style={{ marginTop: '80px' }}>
             <div className='ui card centered'>

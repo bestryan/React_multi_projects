@@ -22,6 +22,8 @@ function App() {
 
   const LOCAL_STORAGE_KEY = "contacts";
   const [contacts, setContacts] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
 
   //RetrieveContacts
   const retriveContacts = async () => {
@@ -39,8 +41,12 @@ function App() {
     // setContacts([...contacts, { id: uuid(), ...contact }]);
   };
 
-  const updateContactHandler = () => {
-
+  const updateContactHandler = async (contact) => {
+    const response = await api.put(`/contacts/${contact.id}`, contact);
+    const { id, name, email } = response.data;
+    setContacts(contacts.map(contact => {
+      return contact.id === id ? { ...response.data } : contact;
+    }))
   };
 
   const removeContactHandler = async (id) => {
@@ -49,6 +55,21 @@ function App() {
       return contact.id !== id;
     });
     setContacts(newContactList);
+  }
+
+  const searchHandler = (searchTerm) => {
+    setSearchTerm(searchTerm);
+    if (searchTerm !== '') {
+      const newContactList = contacts.filter((contact) => {
+        return Object.values(contact)
+          .join(" ")
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase());
+      })
+      setSearchResults(newContactList);
+    } else {
+      setSearchResults(contacts);
+    }
   }
 
   // retrive local storage data
@@ -79,8 +100,10 @@ function App() {
             exact
             element={
               <ContactList
-                contacts={contacts}
+                contacts={searchTerm.length < 1 ? contacts : searchResults}
                 getContactId={removeContactHandler}
+                term={searchTerm}
+                searchKeyword={searchHandler}
               />} />
           <Route path="/add"
             element={
