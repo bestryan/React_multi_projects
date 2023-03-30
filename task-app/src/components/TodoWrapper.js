@@ -6,17 +6,21 @@ import EditTodoForm from './EditTodoForm';
 uuidv4();
 
 const TodoWrapper = () => {
-    const [todos, setTodos] = useState(()=>{
+    const [todos, setTodos] = useState(() => {
         const initialValue = JSON.parse(localStorage.getItem('todos'));
         return initialValue || [];
     });
 
-    useEffect(() => { 
+    useEffect(() => {
         localStorage.setItem('todos', JSON.stringify(todos))
     }, [todos])
 
     const addTodo = (todo) => {
-        setTodos([...todos, { id: uuidv4(), task: todo, completed: false, isEditing: false }])
+        if (todo.trim() === '') {
+            alert("Hi mate, your task is empty!")
+        } else {
+            setTodos([...todos, { id: uuidv4(), task: todo, completed: false, isEditing: false }])
+        }
     }
     const toggleComplete = id => {
         setTodos(todos.map(todo => todo.id === id ? { ...todo, completed: !todo.completed } : todo))
@@ -27,11 +31,15 @@ const TodoWrapper = () => {
     const editTodo = id => {
         setTodos(todos.map(todo => todo.id === id ? { ...todo, isEditing: !todo.isEditing } : todo))
     }
-
     const editTask = (task, id) => {
-        setTodos(todos.map(todo => todo.id === id ? { ...todo, task, isEditing: !todo.isEditing } : todo))
+        if (task.trim() === '') {
+            alert("Hi mate, your updated task is empty!")
+        } else {
+            setTodos(todos.map(todo => todo.id === id ? { ...todo, task, isEditing: !todo.isEditing } : todo))
+        }
     }
-    const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+
+    const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     const today = new Date();
     let date = today.getDate();
@@ -45,13 +53,13 @@ const TodoWrapper = () => {
         <div className='TodoWrapper'>
             <h1>Personal Task List</h1>
             <div className='container'>
-            <h4>{dis}</h4>
-            <h4>{dis2}</h4>
+                <h4>{dis}</h4>
+                <h4>{dis2}</h4>
             </div>
-            <TodoForm addTodo={addTodo}/>
+            <TodoForm addTodo={addTodo} />
             {todos.map((todo, index) => (
                 todo.isEditing ? (
-                    <EditTodoForm editTodo={editTask} task={todo} key={index}/>
+                    <EditTodoForm editTodo={editTask} task={todo} key={index} />
                 ) :
                     (
                         <Todo task={todo} key={index}
