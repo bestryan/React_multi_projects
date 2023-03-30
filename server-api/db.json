@@ -1,0 +1,34 @@
+{
+  "contacts": [
+    {
+      "id": "7a2018e6-e7ea-41e1-b35a-493246a45300",
+      "name": "Ryan",
+      "email": "bestryan88@gmail.com"
+    },
+    {
+      "id": "85dfd9a0-c462-410d-adb2-2135083106e3",
+      "name": "Bella",
+      "email": "bella@gmail.com"
+    },
+    {
+      "id": "136009cf-0055-4184-83b4-36f872735fc7",
+      "name": "Alex",
+      "email": "alex@gmail.com"
+    },
+    {
+      "id": "0e32d992-cf9e-40a7-88fb-439802c2466a",
+      "name": "Rafi",
+      "email": "rafi@tafe.com"
+    },
+    {
+      "id": "f8ba7584-7579-4afd-b807-7b83f78b1787",
+      "name": "Max",
+      "email": "max@gamil.com"
+    },
+    {
+      "id": "7034a756-3024-4e27-92ba-9107d5fc262b",
+      "name": "Keong",
+      "email": "keong@gmail.com"
+    }
+  ]
+}
