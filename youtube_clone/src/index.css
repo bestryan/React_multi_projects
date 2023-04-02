@@ -26,11 +26,11 @@ a {
 }
 
 .category-btn:hover {
-  background-color: #fc1503 !important;
+  background-color: #706e6e !important;
   color: white !important;
 }
 
-.category-btn:hover span {
+#464444 .category-btn:hover span {
   color: white !important;
 }
 
@@ -84,5 +84,17 @@ a {
   }
   .search-bar {
     width: 200px;
+  }
+}
+
+@media screen and (max-width: 590px) {
+  .video_card {
+    width: 370px !important;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .video_card {
+    width: 100% !important;
   }
 }
